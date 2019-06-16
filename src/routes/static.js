@@ -12,4 +12,11 @@ router.get("/marco", (req, res, next) => {
   res.send("polo");
 });
 
+// about
+// router.get("/about", (req, res, next) => {
+//   res.send("About Us");
+// });
+
+router.get("/about", staticController.about);
+
 module.exports = router;
