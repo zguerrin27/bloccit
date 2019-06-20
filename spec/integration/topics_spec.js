@@ -59,6 +59,8 @@ describe("routes : topics", () => {
       }
     };
 
+    // console.log(options);
+
     it("should create a new topic and redirect", (done) => {
       request.post(options,
         (err, res, body) => {
