@@ -70,7 +70,6 @@ describe("Post", () => {
   describe("#setTopic()", () => {
 
     it("should associate a topic and a post together", (done) => {
-
       Topic.create({
         title: "Challenges of interstellar travel",
         description: "1. The Wi-Fi is terrible"
@@ -78,14 +77,13 @@ describe("Post", () => {
       .then((newTopic) => {
 
         expect(this.post.topicId).toBe(this.topic.id);
-// #3
         this.post.setTopic(newTopic)
+        
         .then((post) => {
-// #4
           expect(post.topicId).toBe(newTopic.id);
           done();
-
         });
+
       })
     });
   });
