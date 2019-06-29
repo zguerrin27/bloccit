@@ -37,6 +37,33 @@ module.exports = {
         res.render("flairs/show", {flair});
       }
     });
+  },
+  destroy(req, res, next){
+    flairQueries.deleteFlair(req.params.id, (err, flair) => {
+      if(err){
+        res.redirect(500, `/flairs/${flair.id}`)
+      } else {
+        res.redirect(303, "/flairs")
+      }
+    });
+  },
+  edit(req, res, next){
+    flairQueries.getFlair(req.params.id, (err, flair) => {
+      if(err || flair == null){
+        res.redirect(404, "/");
+      } else {
+        res.render("flairs/edit", {flair});
+      }
+    });
+  },
+  update(req, res, next){
+    flairQueries.updateFlair(req.params.id, req.body, (err, flair) => {
+      if(err || flair == null){
+        res.redirect(404, `/flairs/${req.params.id}/edit`);
+      } else {
+        res.redirect(`/flairs/${flair.id}`);
+      }
+    });
   }
 
 }
