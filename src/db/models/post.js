@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     }
-    
   }, {});
   Post.associate = function(models) {
     // associations can be defined here

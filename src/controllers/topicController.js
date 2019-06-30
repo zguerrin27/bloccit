@@ -16,7 +16,6 @@ module.exports = {
   new(req, res, next){
     res.render("topics/new");
   },
-
   create(req, res, next){
     let newTopic = {
       title: req.body.title,
