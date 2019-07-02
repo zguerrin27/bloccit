@@ -50,17 +50,17 @@ describe("routes : topics", () => {
     const options = {
       url: `${base}create`,
       form: {
-        title: "blink-182 songs",
+        title: "blink-182 songs are my new favorite",
         description: "What's your favorite blink-182 song?"
       }
     };
     it("should create a new topic and redirect", (done) => {
       request.post(options,
         (err, res, body) => {
-          Topic.findOne({where: {title: "blink-182 songs"}})
+          Topic.findOne({where: {title: "blink-182 songs are my new favorite"}})
           .then((topic) => {
             expect(res.statusCode).toBe(303);
-            expect(topic.title).toBe("blink-182 songs");
+            expect(topic.title).toBe("blink-182 songs are my new favorite");
             expect(topic.description).toBe("What's your favorite blink-182 song?");
             done();
           })
@@ -71,6 +71,30 @@ describe("routes : topics", () => {
         }
       );
     });
+
+    it("should not create a new topic that fails validations", (done) => {
+      const options = {
+        url: `${base}create`,
+        form: {
+          title: "a",
+          description: "b"
+        }
+      };
+      request.post(options,
+        (err, res, body) => {
+          Topic.findOne({where: {title: "a"}})
+          .then((post) => {
+              expect(post).toBeNull();
+              done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        }
+      );
+    });
+
   });
 
   describe("GET /topics/:id", () => {
