@@ -71,20 +71,20 @@ describe("Topic", () => {
   });
 
 
-  describe("#getPosts()", () => {
-    it("should create a post and return the associated Posts", (done) => {
-      this.topic.getPosts()  
-      Post.create({
-        title: "My second visit to Proxima Centauri b",
-        body: "Guess what...MORE rocks.",
-        topicId: this.topic.id
-      })
-      .then((post) => {
-        expect(post.title).toContain("My second visit to Proxima Centauri b");
-        done();
-        })
-    });
-  });
+  // describe("#getPosts()", () => {
+  //   it("should create a post and return the associated Posts", (done) => {
+  //     this.topic.getPosts()  
+  //     Post.create({
+  //       title: "My second visit to Proxima Centauri b",
+  //       body: "Guess what...MORE rocks.",
+  //       topicId: this.topic.id
+  //     })
+  //     .then((post) => {
+  //       expect(post.title).toContain("My second visit to Proxima Centauri b");
+  //       done();
+  //       })
+  //   });
+  // });
 
 
 
