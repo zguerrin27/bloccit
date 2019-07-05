@@ -112,15 +112,15 @@ describe("routes : topics", () => {
       });
     });
 
-  // describe("POST /topics/:id/destroy", () => { 
-  //     it("should render a view with the selected topic", (done) => {
-  //       request.get(`${base}${this.topic.id}`, (err, res, body) => {
-  //         expect(err).toBeNull();
-  //         expect(body).toContain("JS Frameworks");
-  //         done();
-  //       });
-  //     });
-  //   });
+  describe("POST /topics/:id/destroy", () => { 
+      it("should render a view with the selected topic", (done) => {
+        request.get(`${base}${this.topic.id}`, (err, res, body) => {
+          expect(err).toBeNull();
+          expect(body).toContain("JS Frameworks");
+          done();
+        });
+      });
+    });
 
   describe("GET /topics/:id/edit", () => { 
       it("should render a view with an edit topic form", (done) => {
@@ -133,26 +133,26 @@ describe("routes : topics", () => {
       });
     });
 
-  // describe("POST /topics/:id/update", () => { 
-  //     it("should update the topic with the given values", (done) => {
-  //       request.post({
-  //         url: `${base}${this.topic.id}/update`,
-  //         form: {
-  //           title: "JavaScript Frameworks",
-  //           description: "There are a lot of them"
-  //         }
-  //       }, (err, res, body) => {
-  //         expect(err).toBeNull();
-  //         Topic.findOne({
-  //           where: {id:1}
-  //         })
-  //         .then((topic) => {
-  //           expect(topic.title).toBe("JavaScript Frameworks");
-  //           done();
-  //         });
-  //       });
-  //     });
-  //   });
+  describe("POST /topics/:id/update", () => { 
+      it("should update the topic with the given values", (done) => {
+        request.post({
+          url: `${base}${this.topic.id}/update`,
+          form: {
+            title: "JavaScript Frameworks",
+            description: "There are a lot of them"
+          }
+        }, (err, res, body) => {
+          expect(err).toBeNull();
+          Topic.findOne({
+            where: {id:1}
+          })
+          .then((topic) => {
+            expect(topic.title).toBe("JavaScript Frameworks");
+            done();
+          });
+        });
+      });
+    });
 
   }); // end of admin
 
@@ -237,23 +237,23 @@ describe("routes : topics", () => {
      });
     });
 
-  // describe("POST /topics/:id/destroy", () => { 
-  //   it("should not delete the topic with the associated ID", (done) => {
-  //     Topic.findAll()
-  //     .then((topics) => {
-  //       const topicCountBeforeDelete = topics.length;
-  //       expect(topicCountBeforeDelete).toBe(1);
-  //       request.post(`${base}${this.topic.id}/destroy`, (err, res, body) => {
-  //         Topic.findAll()
-  //         .then((topics) => {
-  //           // confirm that no topics were deleted
-  //           expect(topics.length).toBe(topicCountBeforeDelete);
-  //           done();
-  //         })
-  //       });
-  //     })
-  //   });
-  // });
+  describe("POST /topics/:id/destroy", () => { 
+    it("should not delete the topic with the associated ID", (done) => {
+      Topic.findAll()
+      .then((topics) => {
+        const topicCountBeforeDelete = topics.length;
+        expect(topicCountBeforeDelete).toBe(1);
+        request.post(`${base}${this.topic.id}/destroy`, (err, res, body) => {
+          Topic.findAll()
+          .then((topics) => {
+            // confirm that no topics were deleted
+            expect(topics.length).toBe(topicCountBeforeDelete);
+            done();
+          })
+        });
+      })
+    });
+  });
 
   describe("GET /topics/:id/edit", () => { 
     it("should not render a view with an edit topic form", (done) => {
@@ -267,28 +267,28 @@ describe("routes : topics", () => {
      });
     });
 
-  // describe("POST /topics/:id/update", () => { 
-  //   it("should not update the topic with the given values", (done) => {
-  //     const options = {
-  //       url: `${base}${this.topic.id}/update`,
-  //       form: {
-  //         title: "JavaScript Frameworks",
-  //         description: "There are a lot of them"
-  //       }
-  //     }
-  //     request.post(options,
-  //     (err, res, body) => {
-  //       expect(err).toBeNull();
-  //       Topic.findOne({
-  //         where: { id:1 }
-  //       })
-  //       .then((topic) => {
-  //         expect(topic.title).toBe("JS Frameworks"); // confirm title is unchanged
-  //         done();
-  //       });
-  //     });
-  //   });
-  //  });
+  describe("POST /topics/:id/update", () => { 
+    it("should not update the topic with the given values", (done) => {
+      const options = {
+        url: `${base}${this.topic.id}/update`,
+        form: {
+          title: "JavaScript Frameworks",
+          description: "There are a lot of them"
+        }
+      }
+      request.post(options,
+      (err, res, body) => {
+        expect(err).toBeNull();
+        Topic.findOne({
+          where: { id:1 }
+        })
+        .then((topic) => {
+          expect(topic.title).toBe("JS Frameworks"); // confirm title is unchanged
+          done();
+        });
+      });
+    });
+   });
 
   }); // end of member
 
