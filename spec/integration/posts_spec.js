@@ -16,7 +16,8 @@ describe("routes : posts", () => {
     sequelize.sync({force: true}).then((res) => {
       User.create({
         email: "starman@tesla.com",
-        password: "Trekkie4lyfe"
+        password: "Trekkie4lyfe",
+        role: "admin"
       })
       .then((user) => {
         this.user = user;
@@ -145,6 +146,8 @@ describe("routes : posts", () => {
     });
 
   }); // Guest CRUD for posts ends *************************
+
+  // ***************************** OWNER OR ADMIN TESTS ************************************
 
   describe("owner or admin user performing CRUD actions for Post", () => {
     beforeEach((done) => {
@@ -290,7 +293,6 @@ describe("routes : posts", () => {
             (err, res, body) => {
   
             expect(err).toBeNull();
-  
             Post.findOne({
               where: {id: this.post.id}
             })
