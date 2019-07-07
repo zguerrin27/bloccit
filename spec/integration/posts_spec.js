@@ -17,7 +17,6 @@ describe("routes : posts", () => {
       User.create({
         email: "starman@tesla.com",
         password: "Trekkie4lyfe",
-        role: "admin"
       })
       .then((user) => {
         this.user = user;
@@ -59,7 +58,7 @@ describe("routes : posts", () => {
             done();
         }
       );
-    });
+    }); 
 
     describe("GET /topics/:topicId/posts/new", () => {
       it("should not render a new post form", (done) => {
@@ -131,21 +130,81 @@ describe("routes : posts", () => {
     });
 
     describe("POST /topics/:topicId/posts/:id/update", () => {
-      it("should not return a status code 302", (done) => {
-        request.post({
+
+      it("should not update the post with the given values", (done) => {
+        const options = {
           url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
           form: {
             title: "Snowman Building Competition",
-            body: "I love watching them melt slowly."
+            description: "I love watching them melt slowly."
           }
-        }, (err, res, body) => {
-          expect(res.statusCode).not.toBe(302);
-          done();
+        }
+        request.post(options,
+        (err, res, body) => {
+          expect(err).toBeNull();
+          Post.findOne({
+            where: { id:1 }
+          })
+          .then((post) => {
+            expect(post.title).toBe("Snowball Fighting"); // confirm title is unchanged
+            done();
+          });
         });
       });
+
+      // it("should not return a status code 302", (done) => {
+      //   request.post({
+      //     url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
+      //     form: {
+      //       title: "Snowman Building Competition",
+      //       body: "I love watching them melt slowly."
+      //     }
+      //   }, (err, res, body) => {
+      //     expect(res.statusCode).not.toBe(302);
+      //     done();
+      //   });
+      // });
+
+      // it("should not update the post with the given values", (done) => {
+      //   const options = {
+      //     url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
+      //     form: {
+      //       title: "Snowman Building Competition",
+      //       body: "I really enjoy the funny hates on them."
+      //     }
+      //   };
+      //   request.post(options,
+      //     (err, res, body) => {
+
+      //     expect(err).toBeNull();
+
+      //     Post.findOne({
+      //       where: {id: this.post.id}
+      //     })
+      //     .then((post) => {
+      //       expect(post.title).toBe("Snowball Fighting");
+      //       done();
+      //     });
+      //   });
+      // });
+
+      // it("should not return a status code 302", (done) => {
+      //   request.post({
+      //     url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
+      //     form: {
+      //       title: "Snowman Building Competition",
+      //       body: "I love watching them melt slowly."
+      //     }
+      //   }, (err, res, body) => {
+      //     expect(res.statusCode).not.toBe(302);
+      //     done();
+      //   });
+      // });
+
     });
 
-  }); // Guest CRUD for posts ends *************************
+
+  }); // ***************   Guest CRUD for posts ends *************************
 
   // ***************************** OWNER OR ADMIN TESTS ************************************
 

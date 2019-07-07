@@ -77,7 +77,8 @@ describe("Topic", () => {
       Post.create({
         title: "My second visit to Proxima Centauri b",
         body: "Guess what...MORE rocks.",
-        topicId: this.topic.id
+        topicId: this.topic.id,
+        userId: this.user.id  
       })
       .then((post) => {
         expect(post.title).toContain("My second visit to Proxima Centauri b");
