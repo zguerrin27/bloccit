@@ -51,7 +51,8 @@ describe("routes : posts", () => {
         {
             url: "http://localhost:3000/auth/fake",
             form: {
-                role: "guest"
+                role: "guest",
+                userId: 0            // this was added when comments where added..without it the specs do not pass.
             }
         },
         (err, res, body) => {
