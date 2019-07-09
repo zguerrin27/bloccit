@@ -263,6 +263,7 @@ describe("Vote", () => {
       .then((vote) => {
         this.comment.getPost()
         .then((associatedPost) => {
+          // console.log(associatedPost)
           expect(associatedPost.title).toBe("My first visit to Proxima Centauri b");
           done();
         });
@@ -276,26 +277,26 @@ describe("Vote", () => {
   });
 
   describe("#getPoints()", () => {
-
     it("should return the associated points", (done) => {
       Vote.create({
-        value: 1, 
+        value: -1, 
         userId: this.user.id,
         postId: this.post.id
       })
-      .then((votes) => {
-        this.post.getPoints()
-        .then((associatedPoints) => {
-          expect(associatedPoints).toBe(1);
+      .then(() => {
+        this.post.getVotes()
+        .then((votes) => {
+          this.post.votes = votes;
+          let points = this.post.getPoints();
+          expect(points).toBe(-1);
           done();
-        });
+        })
       })
       .catch((err) => {
         console.log(err);
         done();
       });
     });
-
   });
 
   describe("#hasUpvoteFor()", () => {
