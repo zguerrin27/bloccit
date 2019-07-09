@@ -118,6 +118,47 @@ describe("Vote", () => {
       })
     });
 
+    it("should not create a vote without the vale 1 or -1", (done) => {
+      Vote.create({
+        value: 4,
+        postId: 1,
+        userId: 1
+      })
+      .then((vote) => {
+        // the code in this block will not be evaluated since the validation error
+        // will skip it. Instead, we'll catch the error in the catch block below
+        // and set the expectations there
+        done();      
+      })
+      .catch((err) => {
+        expect(err.message).toContain("isIn on value failed");
+        done();
+      })
+    });
+
+    it("should not create more than one vote per user for a given post.", (done) => {
+      if(Vote.value === 0){
+        Vote.create({
+          value: 1,
+          postId: this.post.id,
+          userId: this.user.id
+        })
+        .then((vote) => {
+          expect(vote.value).toBe(1);
+          expect(vote.postId).toBe(this.post.id);
+          expect(vote.userId).toBe(this.user.id);
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        });
+      } else {
+        done()
+      }
+    });
+
+
   }); // end of create ********
 
 
@@ -210,7 +251,7 @@ describe("Vote", () => {
 
   });
 
-// #2
+
   describe("#getPost()", () => {
 
     it("should return the associated post", (done) => {
@@ -233,5 +274,84 @@ describe("Vote", () => {
     });
 
   });
+
+  describe("#getPoints()", () => {
+
+    it("should return the associated points", (done) => {
+      Vote.create({
+        value: 1, 
+        userId: this.user.id,
+        postId: this.post.id
+      })
+      .then((votes) => {
+        this.post.getPoints()
+        .then((associatedPoints) => {
+          expect(associatedPoints).toBe(1);
+          done();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        done();
+      });
+    });
+
+  });
+
+  describe("#hasUpvoteFor()", () => {
+
+    it("should return true for a post that has upvote", (done) => {
+      Post.create({
+        title: "This is a title",
+        body: "this is the body",
+        topicId: this.topic.id,
+        userId: this.user.id
+      })
+      .then((post) => {
+        Vote.create({
+          value: 1,
+          userId: this.user.id,
+          postId: this.post.id
+        })
+        .then((vote) => {
+          expect(this.post.hasUpvoteFor(vote, this.user)).toBe(true);
+          done();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        done();
+      });
+    });
+
+  });
+
+  describe("#hasDownvoteFor()", () => {
+
+    it("should return true for a post that has downvote", (done) => {
+      Post.create({
+        title: "This is a title",
+        body: "this is the body",
+        topicId: this.topic.id,
+        userId: this.user.id
+      })
+      .then((post) => {
+        Vote.create({
+          value: -1,
+          userId: this.user.id,
+          postId: this.post.id
+        })
+        .then((vote) => {
+          expect(this.post.hasDownvoteFor(vote, this.user)).toBe(true);
+          done();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        done();
+      });
+    })
+
+  })
 
 }); // main
