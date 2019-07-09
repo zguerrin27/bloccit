@@ -9,7 +9,12 @@
     <main class="container">
       <% include ../static/partials/messages.ejs %>
 
-      <h1><%= post.title %></h1>
+      <div style="display: flex; align-items:center;">
+        <% if(currentUser) { %>
+          <% include ../votes/voting.ejs %>
+        <% } %>
+        <h1><%= post.title %></h1>
+      </div>
 
       <% if(currentUser && (currentUser.isOwner || currentUser.isAdmin)){ %>
 
