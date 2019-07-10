@@ -15,7 +15,6 @@ module.exports = {
     })
   },
   getPost(id, callback){
-    // return Post.findByPk(id)
     return Post.findByPk(id, {
       include: [
         {model: Comment, as: "comments", include: [
