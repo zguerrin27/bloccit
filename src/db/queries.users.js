@@ -2,7 +2,7 @@ const User = require("./models").User;
 const bcrypt = require("bcryptjs");
 const Post = require("./models").Post;
 const Comment = require("./models").Comment;
-
+//
 module.exports = {
 
   createUser(newUser, callback){

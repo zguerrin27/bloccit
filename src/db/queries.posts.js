@@ -3,7 +3,7 @@ const Comment = require("./models").Comment;
 const User = require("./models").User;
 const Vote = require("./models").Vote;
 const Favorite = require("./models").Favorite;
-
+//
 module.exports = {
   addPost(newPost, callback){
     return Post.create(newPost)

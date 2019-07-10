@@ -60,7 +60,7 @@ describe("Vote", () => {
         });
       });
     });
-  });
+  }); //
 
 
   describe("#create()", () => {

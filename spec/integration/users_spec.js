@@ -113,7 +113,7 @@ describe("routes : users", () => {
       })
       .then((res) => {
         this.user = res;
-
+//
         Topic.create({
           title: "Winter Games",
           description: "Post your Winter Games stories.",
@@ -151,7 +151,7 @@ describe("routes : users", () => {
         done();
       });
     });
-    
+
   });
 
 });
