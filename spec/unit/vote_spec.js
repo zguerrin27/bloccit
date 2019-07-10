@@ -118,7 +118,7 @@ describe("Vote", () => {
       })
     });
 
-    it("should not create a vote without the vale 1 or -1", (done) => {
+    it("should not create a vote without the value 1 or -1", (done) => {
       Vote.create({
         value: 4,
         postId: 1,
@@ -260,7 +260,7 @@ describe("Vote", () => {
         userId: this.user.id,
         postId: this.post.id
       })
-      .then((vote) => {
+      .then(() => {
         this.comment.getPost()
         .then((associatedPost) => {
           // console.log(associatedPost)
@@ -277,6 +277,7 @@ describe("Vote", () => {
   });
 
   describe("#getPoints()", () => {
+    
     it("should return the associated points", (done) => {
       Vote.create({
         value: -1, 
@@ -297,6 +298,7 @@ describe("Vote", () => {
         done();
       });
     });
+
   });
 
   describe("#hasUpvoteFor()", () => {
@@ -308,7 +310,7 @@ describe("Vote", () => {
         topicId: this.topic.id,
         userId: this.user.id
       })
-      .then((post) => {
+      .then(() => {
         Vote.create({
           value: 1,
           userId: this.user.id,
@@ -336,7 +338,7 @@ describe("Vote", () => {
         topicId: this.topic.id,
         userId: this.user.id
       })
-      .then((post) => {
+      .then(() => {
         Vote.create({
           value: -1,
           userId: this.user.id,

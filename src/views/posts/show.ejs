@@ -25,6 +25,10 @@
         
       <% } %>
 
+      <% if(currentUser) { %>
+        <% include ../favorites/favoriting.ejs %>
+      <% } %>
+
       <p><%= post.body %></p>
 
       <section id="comment-form">
