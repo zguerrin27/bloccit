@@ -70,34 +70,32 @@ describe("routes : votes", () => {
     });
 
     describe("GET /topics/:topicId/posts/:postId/votes/upvote", () => {
-
-      it("should not create a new vote", (done) => {
-        
+      it("should only have the auto created vote from post model ", (done) => {
         const options = {
           url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
         };
         request.get(options,
-          (err, res, body) => {
-            console.log(this.user.id)
-            Vote.findOne({            // look for the vote, should not find one.
-              where: {
-                userId: this.user.id,
-                postId: this.post.id
-              }
-            })
-            .then((vote) => {
-              expect(vote).toBeNull(); // error here because of there being a userr and the auto add feature of upvote 
-              done();
-            })
-            .catch((err) => {
-              console.log(err);
-              done();
-            });
-          }
-        );
+        (err, res, body) => {
+          Vote.findOne({
+            where: {
+              userId: this.user.id,
+              postId: this.post.id
+            }
+          })
+          .then((vote) => {
+            expect(vote).not.toBeNull();
+            expect(vote.value).toBe(1)    // only 1 because of the user that is being generated above..it has an auto upvote on create of post
+            done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          })
+        })
       });
-
     });
+
+
 
   }); // guest crud 
 
