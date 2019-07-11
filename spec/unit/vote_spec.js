@@ -280,7 +280,7 @@ describe("Vote", () => {
     
     it("should return the associated points", (done) => {
       Vote.create({
-        value: -1, 
+        value: 1, 
         userId: this.user.id,
         postId: this.post.id
       })
@@ -289,7 +289,7 @@ describe("Vote", () => {
         .then((votes) => {
           this.post.votes = votes;
           let points = this.post.getPoints();
-          expect(points).toBe(-1);
+          expect(points).toBe(2); // because of the auto add an upvote feature of the post model
           done();
         })
       })

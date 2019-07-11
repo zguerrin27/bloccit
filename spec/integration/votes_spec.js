@@ -78,7 +78,7 @@ describe("routes : votes", () => {
         };
         request.get(options,
           (err, res, body) => {
-            console.log(this.user)
+            console.log(this.user.id)
             Vote.findOne({            // look for the vote, should not find one.
               where: {
                 userId: this.user.id,
@@ -86,7 +86,7 @@ describe("routes : votes", () => {
               }
             })
             .then((vote) => {
-              expect(vote).toBeNull();
+              expect(vote).toBeNull(); // error here because of there being a userr and the auto add feature of upvote 
               done();
             })
             .catch((err) => {
