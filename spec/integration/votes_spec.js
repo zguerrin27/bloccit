@@ -78,6 +78,7 @@ describe("routes : votes", () => {
         };
         request.get(options,
           (err, res, body) => {
+            console.log(this.user)
             Vote.findOne({            // look for the vote, should not find one.
               where: {
                 userId: this.user.id,
