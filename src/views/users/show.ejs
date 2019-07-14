@@ -50,22 +50,18 @@
         <% } %>
       </ul>
 
-      <!-- <h2>Favorited Posts</h2>
+      <h2>Favorited Posts</h2>
 
       <ul class="list-unstyled">
-
-        <% if(favoites) { %>
-          <% favorites.forEach((favorite) => { %>
-            <li>
-              <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>">
-                <%= post.title %>
-              </a>
-            </li>
-          <% }) %>
-        <% } %>
+        <% if(favorites) { %>
+         <% favorites.forEach((favorite) => { %>
+         <p>Faves: <%= favorite.postId %></p>
+         <%= console.log(favorite) %>
+         <% }) %>
+       <% } %>
       </ul>
-      <hr> -->
-
+      <hr>
+      
 
     </main>
 

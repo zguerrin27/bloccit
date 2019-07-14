@@ -106,6 +106,7 @@ describe("routes : users", () => {
       this.user;
       this.post;
       this.comment;
+      this.favorite;
 
       User.create({
         email: "starman@tesla.com",
@@ -113,7 +114,7 @@ describe("routes : users", () => {
       })
       .then((res) => {
         this.user = res;
-//
+
         Topic.create({
           title: "Winter Games",
           description: "Post your Winter Games stories.",

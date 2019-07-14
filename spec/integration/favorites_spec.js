@@ -68,11 +68,8 @@ describe("Favorite", () => {
  // tests here
 
  describe("#create()", () => {
-
-  // #2
+   
       it("should create a favorite for a post on a user", (done) => {
- 
-  // #3
         Favorite.create({
           postId: this.post.id,
           userId: this.user.id
